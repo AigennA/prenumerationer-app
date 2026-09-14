@@ -1,16 +1,11 @@
-# React + Vite
+# Prenumerationer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+En webbapplikation för att hålla koll på sina prenumerationer 
+(t.ex. Netflix, Spotify) — vilka som är aktiva och vilka som avslutats.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Hur man kör appen
+1. Klona repot: `git clone https://github.com/AigennA/prenumerationer-app.git`
+2. Gå in i mappen: `cd prenumerationer-app`
+3. Installera beroenden: `npm install`
+4. Starta utvecklingsservern: `npm run dev`
+5. Öppna webbläsaren på adressen som visas i terminalen (t.ex. `http://localhost:5173`)
