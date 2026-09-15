@@ -1,16 +1,32 @@
+import { useState } from 'react';
 import PrenumerationItem from './PrenumerationItem';
 
-const dummyData = [
-  { id: 1, serviceName: "Netflix", note: "Månadsplan", isActive: true },
-  { id: 2, serviceName: "Spotify", note: "Årsplan", isActive: false },
-];
+function PrenumerationList({ items, onToggle, onDelete, onEdit }) {
+  const [search, setSearch] = useState("");
 
-function PrenumerationList() {
+  const filtered = items.filter(item =>
+    item.serviceName.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="list">
-      {dummyData.map(item => (
-        <PrenumerationItem key={item.id} data={item} />
-      ))}
+    <div>
+      <input
+        className="search-input"
+        placeholder="Sök prenumeration..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <div className="list">
+        {filtered.map(item => (
+          <PrenumerationItem
+            key={item.id}
+            data={item}
+            onToggle={onToggle}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ))}
+      </div>
     </div>
   );
 }
