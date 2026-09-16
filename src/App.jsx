@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PrenumerationList from './components/PrenumerationList';
 import PrenumerationForm from './components/PrenumerationForm';
+import { getPrenumerationer } from './services/prenumerationApi';
 import './App.css';
 
-const initialData = [
-  { id: 1, serviceName: "Netflix", note: "Månadsplan", startDate: "2025-01-01", endDate: "", isActive: true },
-  { id: 2, serviceName: "Spotify", note: "Årsplan", startDate: "2024-06-01", endDate: "2025-06-01", isActive: false },
-];
-
 function App() {
-  const [prenumerationer, setPrenumerationer] = useState(initialData);
+  const [prenumerationer, setPrenumerationer] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    getPrenumerationer()
+      .then(data => setPrenumerationer(data))
+      .catch(() => setError("Kunde inte hämta prenumerationer. Kontrollera att API:et är igång."))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   function handleAdd(newItem) {
     const id = prenumerationer.length === 0 ? 1 : Math.max(...prenumerationer.map(p => p.id)) + 1;
@@ -36,12 +41,17 @@ function App() {
     <div className="app">
       <h1>Mina prenumerationer</h1>
       <PrenumerationForm onAdd={handleAdd} />
-      <PrenumerationList
-        items={prenumerationer}
-        onToggle={handleToggle}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-      />
+      {error && <p className="message error">{error}</p>}
+      {isLoading ? (
+        <p className="message">Laddar...</p>
+      ) : (
+        <PrenumerationList
+          items={prenumerationer}
+          onToggle={handleToggle}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
+      )}
     </div>
   );
 }
