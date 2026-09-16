@@ -29,3 +29,11 @@ export async function createPrenumeration(prenumeration) {
   });
   return response.json();
 }
+
+export async function updatePrenumeration(prenumeration) {
+  await request(`${API_URL}/${prenumeration.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: toJsonBody(prenumeration),
+  });
+}

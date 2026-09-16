@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PrenumerationList from './components/PrenumerationList';
 import PrenumerationForm from './components/PrenumerationForm';
-import { createPrenumeration, getPrenumerationer } from './services/prenumerationApi';
+import { createPrenumeration, getPrenumerationer, updatePrenumeration } from './services/prenumerationApi';
 import './App.css';
 
 function App() {
@@ -26,10 +26,21 @@ function App() {
     }
   }
 
+  async function updateItem(id, changes) {
+    const current = prenumerationer.find(p => p.id === id);
+    const updated = { ...current, ...changes };
+    setError("");
+    try {
+      await updatePrenumeration(updated);
+      setPrenumerationer(prenumerationer.map(p => (p.id === id ? updated : p)));
+    } catch {
+      setError("Kunde inte uppdatera prenumerationen.");
+    }
+  }
+
   function handleToggle(id) {
-    setPrenumerationer(prenumerationer.map(p =>
-      p.id === id ? { ...p, isActive: !p.isActive } : p
-    ));
+    const current = prenumerationer.find(p => p.id === id);
+    updateItem(id, { isActive: !current.isActive });
   }
 
   function handleDelete(id) {
@@ -37,9 +48,7 @@ function App() {
   }
 
   function handleEdit(id, updatedFields) {
-    setPrenumerationer(prenumerationer.map(p =>
-      p.id === id ? { ...p, ...updatedFields } : p
-    ));
+    updateItem(id, updatedFields);
   }
 
   return (
