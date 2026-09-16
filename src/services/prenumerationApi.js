@@ -37,3 +37,7 @@ export async function updatePrenumeration(prenumeration) {
     body: toJsonBody(prenumeration),
   });
 }
+
+export async function deletePrenumeration(id) {
+  await request(`${API_URL}/${id}`, { method: "DELETE" });
+}

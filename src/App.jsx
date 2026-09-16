@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PrenumerationList from './components/PrenumerationList';
 import PrenumerationForm from './components/PrenumerationForm';
-import { createPrenumeration, getPrenumerationer, updatePrenumeration } from './services/prenumerationApi';
+import { createPrenumeration, deletePrenumeration, getPrenumerationer, updatePrenumeration } from './services/prenumerationApi';
 import './App.css';
 
 function App() {
@@ -43,8 +43,15 @@ function App() {
     updateItem(id, { isActive: !current.isActive });
   }
 
-  function handleDelete(id) {
-    setPrenumerationer(prenumerationer.filter(p => p.id !== id));
+  async function handleDelete(id) {
+    if (!window.confirm("Vill du ta bort prenumerationen?")) return;
+    setError("");
+    try {
+      await deletePrenumeration(id);
+      setPrenumerationer(prenumerationer.filter(p => p.id !== id));
+    } catch {
+      setError("Kunde inte ta bort prenumerationen.");
+    }
   }
 
   function handleEdit(id, updatedFields) {
