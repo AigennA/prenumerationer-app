@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PrenumerationList from './components/PrenumerationList';
 import PrenumerationForm from './components/PrenumerationForm';
-import { getPrenumerationer } from './services/prenumerationApi';
+import { createPrenumeration, getPrenumerationer } from './services/prenumerationApi';
 import './App.css';
 
 function App() {
@@ -16,9 +16,14 @@ function App() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  function handleAdd(newItem) {
-    const id = prenumerationer.length === 0 ? 1 : Math.max(...prenumerationer.map(p => p.id)) + 1;
-    setPrenumerationer([...prenumerationer, { ...newItem, id }]);
+  async function handleAdd(newItem) {
+    setError("");
+    try {
+      const created = await createPrenumeration(newItem);
+      setPrenumerationer([...prenumerationer, created]);
+    } catch {
+      setError("Kunde inte lägga till prenumerationen.");
+    }
   }
 
   function handleToggle(id) {
