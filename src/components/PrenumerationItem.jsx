@@ -3,7 +3,7 @@ import { useState } from 'react';
 function PrenumerationItem({ data, onToggle, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [serviceName, setServiceName] = useState(data.serviceName);
-  const [note, setNote] = useState(data.note);
+  const [note, setNote] = useState(data.note || "");
   const [startDate, setStartDate] = useState(data.startDate || "");
   const [endDate, setEndDate] = useState(data.endDate || "");
 
@@ -14,7 +14,7 @@ function PrenumerationItem({ data, onToggle, onDelete, onEdit }) {
 
   function handleCancel() {
     setServiceName(data.serviceName);
-    setNote(data.note);
+    setNote(data.note || "");
     setStartDate(data.startDate || "");
     setEndDate(data.endDate || "");
     setIsEditing(false);
