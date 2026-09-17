@@ -3,6 +3,14 @@
 En webbapplikation för att hålla koll på sina prenumerationer 
 (t.ex. Netflix, Spotify) — vilka som är aktiva och vilka som avslutats.
 
+## Funktioner
+- Lista, lägga till, redigera och ta bort prenumerationer
+- Markera en prenumeration som aktiv eller avslutad
+- Söka bland prenumerationer
+- Ladda upp en logga och en fil (till exempel ett kvitto eller avtal) till varje prenumeration
+- Felmeddelanden visas om ett anrop till API:et misslyckas
+- Responsiv layout för mobil, surfplatta och desktop
+
 ## Kom igång
 
 > **Viktigt:** Starta alltid backend (API:et) först och sedan frontend.
@@ -45,15 +53,30 @@ npm run dev
 
 Om ett felmeddelande visas: kontrollera att API:et är igång och ladda om sidan.
 
+### Valfritt: öppna båda projekten i samma VS Code-fönster
+Öppna mappen `PrenumerationerApi` i VS Code och lägg sedan till webbappen med
+**File → Add Folder to Workspace...** och välj mappen `prenumerationer-app`.
+Båda projekten visas då i samma fönster.
+
+Öppna en terminal per projekt med **Terminal → New Terminal** och välj mapp,
+så kan `dotnet run` och `npm run dev` köras samtidigt.
+
 ## Tekniska val
 - **Vite** valdes som byggverktyg för React eftersom det ger snabbare 
   utvecklingsserver och enklare konfiguration jämfört med Create React App.
-- **768px och 480px** valdes som brytpunkter för responsiv design, en 
-  vanlig standard för att skilja mobil, surfplatta och desktop-vy.
+- **Tre layouter beroende på skärmstorlek:** mobil (upp till 767px) visar en kolumn,
+  surfplatta (från 768px) två kolumner och desktop (från 1024px) tre kolumner.
+  Under 480px blir formuläret och korten mer kompakta.
+- **Knapparna ligger i ett rutnät med lika breda knappar** så att alla kort ser likadana ut,
+  oavsett hur långa knapptexterna är.
 - **fetch** används för API-anrop eftersom det är inbyggt i webbläsaren och räcker
   för enkla anrop, utan extra beroenden som axios.
 - **API-anropen ligger i `src/services/`** så att komponenterna bara hanterar
   gränssnittet och API-adressen finns på ett enda ställe.
+- **Varje prenumeration har en logga och en fil i separata fält** så att listan ser enhetlig ut:
+  loggan visas alltid på samma plats, och saknas den visas tjänstens första bokstav.
+- **Filstorleken kontrolleras även i webbappen** så att användaren får ett felmeddelande direkt,
+  utan att först behöva vänta på att en stor fil laddas upp.
 - **Porten är låst till 5173** (`strictPort` i `vite.config.js`) eftersom API:ets
   CORS-inställning bara tillåter den adressen.
 - **Domänbegrepp som `Prenumeration` är på svenska** eftersom appen riktar sig till
