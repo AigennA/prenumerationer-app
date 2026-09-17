@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import PrenumerationItem from './PrenumerationItem';
 
+const VISIBLE_LIMIT = 6;
+
 function PrenumerationList({ items, onToggle, onDelete, onEdit, onLogoUpload, onDocumentUpload }) {
   const [search, setSearch] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const filtered = items.filter(item =>
     item.serviceName.toLowerCase().includes(search.toLowerCase())
   );
+
+  const visible = showAll ? filtered : filtered.slice(0, VISIBLE_LIMIT);
+  const hidden = filtered.length - visible.length;
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+    setShowAll(false);
+  }
 
   return (
     <div>
@@ -14,10 +25,17 @@ function PrenumerationList({ items, onToggle, onDelete, onEdit, onLogoUpload, on
         className="search-input"
         placeholder="Sök prenumeration..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={handleSearch}
       />
+      {filtered.length === 0 && (
+        <p className="message empty">
+          {items.length === 0
+            ? "Inga prenumerationer ännu. Lägg till din första i formuläret ovan."
+            : "Inga prenumerationer matchar sökningen."}
+        </p>
+      )}
       <div className="list">
-        {filtered.map(item => (
+        {visible.map(item => (
           <PrenumerationItem
             key={item.id}
             data={item}
@@ -29,6 +47,11 @@ function PrenumerationList({ items, onToggle, onDelete, onEdit, onLogoUpload, on
           />
         ))}
       </div>
+      {filtered.length > VISIBLE_LIMIT && (
+        <button className="btn-show-more" onClick={() => setShowAll(!showAll)}>
+          {showAll ? "Visa färre" : `Visa fler (${hidden})`}
+        </button>
+      )}
     </div>
   );
 }

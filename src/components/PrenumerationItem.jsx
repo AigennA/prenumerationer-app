@@ -21,6 +21,11 @@ function PrenumerationItem({ data, onToggle, onDelete, onEdit, onLogoUpload, onD
     setIsEditing(false);
   }
 
+  const today = new Date().toLocaleDateString("sv-SE");
+  const isUpcoming = data.isActive && data.startDate > today;
+  const status = !data.isActive ? "inactive" : isUpcoming ? "upcoming" : "active";
+  const statusText = status === "inactive" ? "Avslutad" : status === "upcoming" ? "Kommande" : "Aktiv";
+
   function handleFileChange(e, onUpload) {
     const file = e.target.files[0];
     e.target.value = "";
@@ -49,7 +54,7 @@ function PrenumerationItem({ data, onToggle, onDelete, onEdit, onLogoUpload, onD
   }
 
   return (
-    <div className="item">
+    <div className={`item ${status}`}>
       <div className="item-header">
         {data.logoUrl ? (
           <img className="item-logo" src={getFileUrl(data.logoUrl)} alt={`Logga för ${data.serviceName}`} />
@@ -70,10 +75,10 @@ function PrenumerationItem({ data, onToggle, onDelete, onEdit, onLogoUpload, onD
       </div>
       <div className="item-actions">
         <span
-          className={`status ${data.isActive ? "active" : "inactive"}`}
+          className={`status ${status}`}
           onClick={() => onToggle(data.id)}
         >
-          {data.isActive ? "Aktiv" : "Avslutad"}
+          {statusText}
         </span>
         <button className="btn-edit" onClick={() => setIsEditing(true)}>Redigera</button>
         <button className="btn-delete" onClick={() => onDelete(data.id)}>Ta bort</button>
