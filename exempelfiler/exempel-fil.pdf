@@ -1,0 +1,59 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 922 >>
+stream
+BT
+/F1 20 Tf 0 0 1 60 780 Tm
+(Exempelfil - Prenumerationskollen) Tj
+/F1 12 Tf 0 0 1 60 746 Tm
+(Den här filen används för att testa filuppladdning i webbappen.) Tj
+/F1 12 Tf 0 0 1 60 720 Tm
+(Så här gör du:) Tj
+/F1 12 Tf 0 0 1 60 700 Tm
+(1. Starta API:et med dotnet run och webbappen med npm run dev.) Tj
+/F1 12 Tf 0 0 1 60 682 Tm
+(2. Välj en prenumeration i listan.) Tj
+/F1 12 Tf 0 0 1 60 664 Tm
+(3. Klicka på Ladda upp fil och välj den här PDF-filen.) Tj
+/F1 12 Tf 0 0 1 60 646 Tm
+(4. Filnamnet visas i kortet som en länk. Klicka för att öppna filen.) Tj
+/F1 12 Tf 0 0 1 60 620 Tm
+(Tillåtna filtyper för fil: PDF, JPG, PNG och WebP. Max 25 MB.) Tj
+/F1 12 Tf 0 0 1 60 602 Tm
+(Tillåtna filtyper för logga: JPG, PNG, WebP och GIF. Max 25 MB.) Tj
+/F1 12 Tf 0 0 1 60 576 Tm
+(I verkligheten kan det här vara ett kvitto, ett avtal eller en) Tj
+/F1 12 Tf 0 0 1 60 558 Tm
+(bekräftelse på att en prenumeration har sagts upp.) Tj
+ET
+
+endobj
+6 0 obj
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000338 00000 n 
+0000001301 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1326
+%%EOF

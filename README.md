@@ -7,7 +7,8 @@ En webbapplikation för att hålla koll på sina prenumerationer
 - Lista, lägga till, redigera och ta bort prenumerationer
 - Markera en prenumeration som aktiv eller avslutad
 - Söka bland prenumerationer
-- Ladda upp en logga och en fil (till exempel ett kvitto eller avtal) till varje prenumeration
+- Ladda upp en logga och en fil (till exempel ett kvitto eller avtal) till varje prenumeration.
+  Exempelfiler att testa med finns i mappen `exempelfiler/`
 - Felmeddelanden visas om ett anrop till API:et misslyckas
 - Responsiv layout för mobil, surfplatta och desktop
 
