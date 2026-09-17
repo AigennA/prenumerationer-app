@@ -90,7 +90,9 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Mina prenumerationer</h1>
+      <img className="app-logo" src="/logo.png" alt="" />
+      <h1>Prenumerationskollen</h1>
+      <p className="subtitle">Håll koll på vad du betalar för varje månad</p>
       <PrenumerationForm onAdd={handleAdd} />
       {error && <p className="message error">{error}</p>}
       {isLoading ? (
