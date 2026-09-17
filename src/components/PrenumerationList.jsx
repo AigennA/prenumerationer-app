@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PrenumerationItem from './PrenumerationItem';
 
-function PrenumerationList({ items, onToggle, onDelete, onEdit }) {
+function PrenumerationList({ items, onToggle, onDelete, onEdit, onLogoUpload, onDocumentUpload }) {
   const [search, setSearch] = useState("");
 
   const filtered = items.filter(item =>
@@ -24,6 +24,8 @@ function PrenumerationList({ items, onToggle, onDelete, onEdit }) {
             onToggle={onToggle}
             onDelete={onDelete}
             onEdit={onEdit}
+            onLogoUpload={onLogoUpload}
+            onDocumentUpload={onDocumentUpload}
           />
         ))}
       </div>

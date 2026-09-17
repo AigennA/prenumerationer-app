@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 import PrenumerationList from './components/PrenumerationList';
 import PrenumerationForm from './components/PrenumerationForm';
-import { createPrenumeration, deletePrenumeration, getPrenumerationer, updatePrenumeration } from './services/prenumerationApi';
+import {
+  createPrenumeration,
+  deletePrenumeration,
+  getPrenumerationer,
+  MAX_FILE_SIZE_MB,
+  updatePrenumeration,
+  uploadDocument,
+  uploadLogo,
+} from './services/prenumerationApi';
 import './App.css';
 
 function App() {
@@ -58,6 +66,28 @@ function App() {
     updateItem(id, updatedFields);
   }
 
+  async function handleUpload(id, file, upload, errorMessage) {
+    setError("");
+    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      setError(`${errorMessage}: Filen får vara högst ${MAX_FILE_SIZE_MB} MB.`);
+      return;
+    }
+    try {
+      const updated = await upload(id, file);
+      setPrenumerationer(prenumerationer.map(p => (p.id === id ? updated : p)));
+    } catch (err) {
+      setError(`${errorMessage}: ${err.message}`);
+    }
+  }
+
+  function handleLogoUpload(id, file) {
+    handleUpload(id, file, uploadLogo, "Kunde inte ladda upp loggan");
+  }
+
+  function handleDocumentUpload(id, file) {
+    handleUpload(id, file, uploadDocument, "Kunde inte ladda upp filen");
+  }
+
   return (
     <div className="app">
       <h1>Mina prenumerationer</h1>
@@ -71,6 +101,8 @@ function App() {
           onToggle={handleToggle}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onLogoUpload={handleLogoUpload}
+          onDocumentUpload={handleDocumentUpload}
         />
       )}
     </div>
