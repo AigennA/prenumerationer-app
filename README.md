@@ -1,4 +1,4 @@
-# Prenumerationer
+# Prenumerationskollen
 
 En webbapplikation för att hålla koll på sina prenumerationer 
 (t.ex. Netflix, Spotify) — vilka som är aktiva och vilka som avslutats.
